@@ -6,6 +6,6 @@
 - Validate IDs, dates, target endpoints and response shapes.
 - Add output selection and synthetic contract/routing tests.
 - Use Node16 module resolution to support the additional non-beta CLI build check.
-- Document actual editor acceptance and remaining toolchain/live-account gaps.
+- Document editor and real synthetic-account acceptance, current development findings and bounded release controls.
 - Request an explicit service language so simplified output preserves actual provider service names.
-- Keep npm publication blocked pending acceptance and explicit approval.
+- Prepare the owner-approved source release; npm access, registry installation and n8n review remain pending.

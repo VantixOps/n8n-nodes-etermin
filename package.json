@@ -30,7 +30,8 @@
     "examples/*.json",
     "README.md",
     "LICENSE",
-    "CHANGELOG.md"
+    "CHANGELOG.md",
+    "DEVELOPMENT_SECURITY.md"
   ],
   "n8n": {
     "n8nNodesApiVersion": 1,
@@ -54,7 +55,7 @@
   "peerDependencies": {
     "n8n-workflow": "*"
   },
-  "private": true,
+  "private": false,
   "engines": {
     "node": ">=22.16"
   }

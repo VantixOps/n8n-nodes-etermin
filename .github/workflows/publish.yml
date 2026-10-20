@@ -1,4 +1,4 @@
-# Prepared only; enable after explicit owner approval. Manual runs only.
+# Owner-approved publication path. Configure npm access before a manual release.
 name: Publish approved package
 on:
   workflow_dispatch:

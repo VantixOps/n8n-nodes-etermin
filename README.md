@@ -2,7 +2,7 @@
 
 Read calendars, bookable services and available time slots from [eTermin](https://www.etermin.net/online-terminplaner-api).
 
-**Unpublished development package. Not verified by n8n or endorsed by eTermin.** The GitHub repository URL in package metadata is a proposed publication destination, not a live repository. Publication requires owner approval and the remaining release gates documented in the parent roadmap.
+**Source release; npm publication pending. Not verified by n8n or endorsed by eTermin.** Source and release workflows are provided under MIT in [VantixOps/n8n-nodes-etermin](https://github.com/VantixOps/n8n-nodes-etermin). Public registry installation and n8n review remain pending.
 
 ## Operations
 
@@ -60,13 +60,13 @@ Time strings remain exactly as provided by eTermin. No timezone conversion is in
 
 Invalid IDs and impossible dates stop before an API request. Unexpected response shapes stop processing instead of appearing as a successful empty result. Network, authentication and rate-limit failures propagate through n8n; no custom response-body logging or hidden retry loop is added. Requests time out after 30 seconds. Configure workflow error handling for your own environment.
 
-This first version intentionally excludes appointment records, contact records, writes and webhook triggers. The project contains no runtime dependencies, filesystem access or environment-variable access in the node/credential code. No customer data or real API keys were used for the tests.
+This first version intentionally excludes appointment records, contact records, writes and webhook triggers. The node/credential code has no filesystem or environment-variable access and the package bundles no third-party runtime dependencies. No customer data or production credentials were used. Contract tests use synthetic credentials; authenticated provider acceptance uses keys confined to a dedicated synthetic trial account.
 
 ## Tests and acceptance
 
 `npm test` runs contract tests for signing, target restrictions, parameter mapping, dates, response validation, output modes, item preservation, unequal result counts across multiple inputs, and the real n8n response-routing implementation. Test transport is synthetic. The node has also been inspected in a disposable n8n 2.44.4 editor: calendars, services, time slots, output choices and masked credential fields. This used a local custom-extension loader, not a published npm installation. Twelve authenticated provider checks also passed using a dedicated synthetic trial account and the real n8n routing implementation. These include localized service names, output selection, filters, slots and an invalid signature. A saved, inactive workflow in a disposable n8n 2.44.4 instance also passed a real credential connection test and all three provider operations, with expected names, price, duration and nine time slots independently read back. Public registry installation and n8n approval remain separate acceptance steps; passing these checks is not n8n verification.
 
-The pinned CLI 0.54.0 is tagged beta. The same source also passes build and lint using CLI 0.53.2; modern Node16 module resolution is configured. Development dependency audit findings remain unresolved, so this package is not cleared for publication. See the parent project roadmap for dependency-audit findings and publication blockers. Development tools have a separate dependency chain from the dependency-free npm runtime package. Do not interpret an empty production-only dependency audit as approval of the build environment.
+The pinned CLI 0.54.0 is tagged beta. The same source also passes build and lint using CLI 0.53.2; modern Node16 module resolution is configured. Known development dependency audit findings remain open. The controlled build path was assessed separately and the prepared release workflow separates building from privileged publication. See [Development security](DEVELOPMENT_SECURITY.md) for the findings, controls and limits. These controls do not establish that every development command is safe. The package bundles no third-party runtime dependencies and uses the n8n-workflow peer supplied by the host; the host remains a separate security responsibility.
 
 ## API and attribution
 
