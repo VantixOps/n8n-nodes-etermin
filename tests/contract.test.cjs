@@ -86,7 +86,7 @@ test('credentials are hidden and package has no runtime dependencies', () => {
   for (const p of api.properties) { assert.equal(p.typeOptions.password,true);assert.equal(p.required,true); }
   const pkg=require('../package.json');
   assert.equal(Object.keys(pkg.dependencies||{}).length,0);
-  assert.equal(pkg.license,'MIT');assert.equal(pkg.private,true);
+  assert.equal(pkg.license,'MIT');assert.equal(pkg.private,false);
 });
 
 test('real n8n routing expands the API array into one item per calendar', async () => {
