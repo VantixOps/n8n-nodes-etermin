@@ -2,7 +2,7 @@
 
 Read calendars, bookable services and available time slots from [eTermin](https://www.etermin.net/online-terminplaner-api).
 
-**Source release; npm publication pending. Not verified by n8n or endorsed by eTermin.** Source and release workflows are provided under MIT in [VantixOps/n8n-nodes-etermin](https://github.com/VantixOps/n8n-nodes-etermin). Public registry installation and n8n review remain pending.
+**Independent integration. Not verified by n8n or endorsed by eTermin.** Source and release workflows are provided under MIT in [VantixOps/n8n-nodes-etermin](https://github.com/VantixOps/n8n-nodes-etermin). Check the [npm package page](https://www.npmjs.com/package/n8n-nodes-etermin) for available registry releases.
 
 ## Operations
 
@@ -16,9 +16,9 @@ Use this node to build availability lookups for service businesses without rebui
 
 ## Installation
 
-This package is not available from npm yet. For development use Node.js 22.16 or newer, run `npm ci`, `npm test`, and `npm run lint`. To load a preview, use `npm run dev -- --custom-user-folder /absolute/path/to/disposable-n8n-state` in a disposable n8n instance. Never point the preview at production state.
+For a public registry release, install `n8n-nodes-etermin` from **Settings → Community Nodes** in your self-hosted n8n instance. Before a registry release is available, use the development preview instead. For development use Node.js 22.16 or newer, run `npm ci --ignore-scripts`, `npm test`, and `npm run lint`. To load a preview, use `npm run dev -- --custom-user-folder /absolute/path/to/disposable-n8n-state` in a disposable n8n instance. Never point the preview at production state.
 
-A future public release is intended for installation through n8n Community Nodes. Cloud availability requires n8n verification and is not currently claimed. Tested code dependencies: n8n-workflow 2.44.1 and n8n-core 2.44.2; these are development test versions, not a compatibility promise for every n8n release.
+Cloud availability requires n8n verification and is not currently claimed. Tested code dependencies: n8n-workflow 2.44.1 and n8n-core 2.44.2; these are development test versions, not a compatibility promise for every n8n release.
 
 ## Credentials
 
@@ -64,7 +64,7 @@ This first version intentionally excludes appointment records, contact records, 
 
 ## Tests and acceptance
 
-`npm test` runs contract tests for signing, target restrictions, parameter mapping, dates, response validation, output modes, item preservation, unequal result counts across multiple inputs, and the real n8n response-routing implementation. Test transport is synthetic. The node has also been inspected in a disposable n8n 2.44.4 editor: calendars, services, time slots, output choices and masked credential fields. This used a local custom-extension loader, not a published npm installation. Twelve authenticated provider checks also passed using a dedicated synthetic trial account and the real n8n routing implementation. These include localized service names, output selection, filters, slots and an invalid signature. A saved, inactive workflow in a disposable n8n 2.44.4 instance also passed a real credential connection test and all three provider operations, with expected names, price, duration and nine time slots independently read back. Public registry installation and n8n approval remain separate acceptance steps; passing these checks is not n8n verification.
+`npm test` runs contract tests for signing, target restrictions, parameter mapping, dates, response validation, output modes, item preservation, unequal result counts across multiple inputs, and the real n8n response-routing implementation. Test transport is synthetic. The node has also been inspected in a disposable n8n 2.44.4 editor: calendars, services, time slots, output choices and masked credential fields. This used a local custom-extension loader, not a published npm installation. Twelve authenticated provider checks also passed using a dedicated synthetic trial account and the real n8n routing implementation. These include localized service names, output selection, filters, slots and an invalid signature. A saved, inactive workflow in a disposable n8n 2.44.4 instance also passed a real credential connection test and all three provider operations, with expected names, price, duration and nine time slots independently read back. Public registry installation and n8n approval are separate acceptance steps; passing these checks is not n8n verification.
 
 The pinned CLI 0.54.0 is tagged beta. The same source also passes build and lint using CLI 0.53.2; modern Node16 module resolution is configured. Known development dependency audit findings remain open. The controlled build path was assessed separately and the prepared release workflow separates building from privileged publication. See [Development security](DEVELOPMENT_SECURITY.md) for the findings, controls and limits. These controls do not establish that every development command is safe. The package bundles no third-party runtime dependencies and uses the n8n-workflow peer supplied by the host; the host remains a separate security responsibility.
 
