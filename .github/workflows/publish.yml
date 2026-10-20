@@ -7,6 +7,11 @@ on:
         description: Enter PUBLISH after owner approval and acceptance
         required: true
         type: string
+      bootstrap:
+        description: Use the approved temporary credential for the initial registry release only
+        required: true
+        type: boolean
+        default: false
 permissions:
   contents: read
 concurrency:
@@ -67,4 +72,17 @@ jobs:
         run: sha256sum --check SHA256SUMS
       - name: Stage for personal approval
         working-directory: release
-        run: npm stage publish ./n8n-nodes-etermin-0.1.0.tgz --ignore-scripts --provenance --access public --loglevel=verbose
+        env:
+          BOOTSTRAP: ${{ inputs.bootstrap }}
+          BOOTSTRAP_NPM_TOKEN: ${{ secrets.NPM_BOOTSTRAP_TOKEN }}
+        run: |
+          if [ "$BOOTSTRAP" = "true" ]; then
+            test -n "$BOOTSTRAP_NPM_TOKEN"
+            umask 077
+            npmrc="$(mktemp)"
+            trap 'rm -f "$npmrc"' EXIT
+            printf '//registry.npmjs.org/:_authToken=%s\n' "$BOOTSTRAP_NPM_TOKEN" > "$npmrc"
+            npm stage publish ./n8n-nodes-etermin-0.1.0.tgz --userconfig "$npmrc" --ignore-scripts --provenance --access public
+          else
+            npm stage publish ./n8n-nodes-etermin-0.1.0.tgz --ignore-scripts --provenance --access public
+          fi
