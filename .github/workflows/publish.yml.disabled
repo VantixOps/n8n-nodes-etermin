@@ -1,4 +1,4 @@
-# Prepared only; rename to publish.yml after explicit owner approval.
+# Prepared only; enable after explicit owner approval. Manual runs only.
 name: Publish approved package
 on:
   workflow_dispatch:
@@ -7,24 +7,64 @@ on:
         description: Enter PUBLISH after owner approval and acceptance
         required: true
         type: string
+permissions:
+  contents: read
+concurrency:
+  group: npm-release
+  cancel-in-progress: false
 jobs:
-  publish:
-    if: inputs.confirmation == 'PUBLISH'
+  build:
+    if: inputs.confirmation == 'PUBLISH' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - run: npm ci --ignore-scripts
+      - run: npm test
+      - run: npm run lint
+      - name: Check package publication gate
+        run: node -e "if(require('./package.json').private !== false) process.exit(1)"
+      - name: Pack the tested files
+        run: |
+          mkdir release
+          npm pack --ignore-scripts --pack-destination release
+          cd release
+          sha256sum n8n-nodes-etermin-0.1.0.tgz > SHA256SUMS
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: approved-package
+          path: release/
+          if-no-files-found: error
+          retention-days: 7
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
     environment: npm-release
     permissions:
       contents: read
       id-token: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      # A fresh runner: no checkout, no development dependencies, no package scripts.
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
         with:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org'
-          cache: npm
-      - run: npm ci --ignore-scripts
-      - run: npm test
-      - run: npm run lint
-      - name: Confirm publication is enabled in the approved source
-        run: node -e "if(require('./package.json').private) process.exit(1)"
-      - run: npm publish --provenance --access public
+          package-manager-cache: false
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: approved-package
+          path: release
+      - name: Verify transfer and publish the tarball
+        working-directory: release
+        run: |
+          sha256sum --check SHA256SUMS
+          npm publish ./n8n-nodes-etermin-0.1.0.tgz --ignore-scripts --provenance --access public
