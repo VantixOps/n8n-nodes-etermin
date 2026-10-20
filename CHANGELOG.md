@@ -7,4 +7,5 @@
 - Add output selection and synthetic contract/routing tests.
 - Use Node16 module resolution to support the additional non-beta CLI build check.
 - Document actual editor acceptance and remaining toolchain/live-account gaps.
+- Request an explicit service language so simplified output preserves actual provider service names.
 - Keep npm publication blocked pending acceptance and explicit approval.

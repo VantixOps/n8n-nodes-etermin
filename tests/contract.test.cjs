@@ -32,7 +32,7 @@ test('auth rejects missing credentials, non-service targets and path escapes', a
 });
 
 function context(parameters,itemIndex=0) {
-  return { getItemIndex() { return itemIndex; }, getNodeParameter(name) { return parameters[name]; }, getNode() { return {name:'Synthetic test',type:'n8n-nodes-etermin.etermin',typeVersion:1,position:[0,0],parameters:{}}; } };
+  return { getItemIndex() { return itemIndex; }, getNodeParameter(name, fallback) { return Object.hasOwn(parameters,name) ? parameters[name] : fallback; }, getNode() { return {name:'Synthetic test',type:'n8n-nodes-etermin.etermin',typeVersion:1,position:[0,0],parameters:{}}; } };
 }
 function operation(resource) {
   const property = description.properties.find(p => p.name==='operation' && p.displayOptions.show.resource.includes(resource));
@@ -108,7 +108,7 @@ test('real routing sends signed service and slot queries through a synthetic HTT
     if(request.headers.signature!==signature || request.headers.publickey!==fakeCredentials.apiKey) { response.writeHead(401).end();return; }
     received.push(request.url);
     response.setHeader('content-type','application/json');
-    response.end(JSON.stringify(request.url.startsWith('/service') ? [{ServiceID:7,Service:'Synthetic service',Enabled:true}] : [{calendarid:42,start:'2028-02-29T10:00:00',end:'2028-02-29T10:30:00'}]));
+    response.end(JSON.stringify(request.url.startsWith('/service') ? (new URL(request.url,'http://localhost').searchParams.has('languageid') ? [{ServiceID:7,Service:'Synthetic service',Enabled:true}] : [{ServiceID:7,ServiceEN:'Synthetic service',Enabled:true}]) : [{calendarid:42,start:'2028-02-29T10:00:00',end:'2028-02-29T10:30:00'}]));
   });
   await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
   try {
@@ -127,9 +127,9 @@ test('real routing sends signed service and slot queries through a synthetic HTT
       }};
       const requestData={options:{...description.requestDefaults,...route.request},preSend:route.send.preSend,postReceive:[{actions:route.output.postReceive,data:{parameterValue:'getMany'}}]};
       const output=await router.makeRequest(requestData,ctx,0,0,'eterminApi');
-      assert.equal(output.length,1);assert.equal(output[0].json[resource==='service'?'ServiceID':'calendarid'],resource==='service'?7:42);
+      assert.equal(output.length,1);assert.equal(output[0].json[resource==='service'?'ServiceID':'calendarid'],resource==='service'?7:42);if(resource==='service')assert.equal(output[0].json.Service,'Synthetic service');
     }
-    assert.equal(received[0],'/service?id=7');
+    assert.equal(received[0],'/service?id=7&languageid=EN');
     assert.equal(received[1],'/timeslots?calendarid=42&serviceid=7&date=2028-02-29');
   } finally { await new Promise(resolve=>server.close(resolve)); }
 });
@@ -147,4 +147,11 @@ test('real routing keeps results linked to the correct input when result counts 
     }
     assert.deepEqual(merged.map(item=>item.pairedItem?.item),expected);
   }
+});
+
+test('service language is explicit so provider names survive simplified output', async () => {
+ const pre=operation('service').send.preSend[0];
+ assert.equal((await pre.call(context({resource:'service'}),{url:'/service'})).qs.languageid,'EN');
+ assert.equal((await pre.call(context({resource:'service',languageId:'de'}),{url:'/service'})).qs.languageid,'DE');
+ for(const languageId of ['', 'DE&x=1','English']) await assert.rejects(()=>pre.call(context({resource:'service',languageId}),{url:'/service'}));
 });

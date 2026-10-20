@@ -26,6 +26,11 @@ export async function prepareRequest(this: IExecuteSingleFunctions, request: IHt
 			const id = positiveId(this.getNodeParameter('serviceId', ''), 'Service ID');
 			if (id !== undefined) qs[resource === 'service' ? 'id' : 'serviceid'] = resource === 'service' ? id : String(id);
 		}
+		if (resource === 'service') {
+			const language = this.getNodeParameter('languageId', 'EN');
+			if (typeof language !== 'string' || !/^[a-z]{2}$/i.test(language)) throw new Error("Enter a two-letter code such as EN or DE in 'Language Code'");
+			qs.languageid = language.toUpperCase();
+		}
 		if (resource === 'timeSlot') {
 			const date = this.getNodeParameter('date');
 			if (typeof date !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(date) ||

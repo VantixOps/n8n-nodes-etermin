@@ -32,6 +32,7 @@ export class Etermin implements INodeType {
 			...operations,
 			{ displayName: 'Calendar ID', name: 'calendarId', type: 'string', default: '', placeholder: 'e.g. 42', description: 'Limit results to one calendar; leave empty for all calendars', displayOptions: { show: { resource: ['calendar', 'timeSlot'] } } },
 			{ displayName: 'Service ID', name: 'serviceId', type: 'string', default: '', placeholder: 'e.g. 7', description: 'Limit results to one service; required for slots restricted to a service in your account', displayOptions: { show: { resource: ['service', 'timeSlot'] } } },
+			{ displayName: 'Language Code', name: 'languageId', type: 'string', default: 'EN', placeholder: 'e.g. EN or DE', description: 'Two-letter language code for service names and descriptions, as configured in eTermin', displayOptions: { show: { resource: ['service'] } } },
 			{ displayName: 'Date', name: 'date', type: 'string', required: true, default: '', placeholder: 'e.g. 2026-10-20', description: 'Calendar date in YYYY-MM-DD format, interpreted by eTermin account settings', displayOptions: { show: { resource: ['timeSlot'] } } },
 			{ displayName: 'Return All', name: 'returnAll', type: 'boolean', default: true, description: 'Whether to return all results or only up to a given limit' },
 			{ displayName: 'Limit', name: 'limit', type: 'number', default: 50, typeOptions: { minValue: 1, maxValue: 10000 }, description: 'Max number of results to return', displayOptions: { show: { returnAll: [false] } } },
