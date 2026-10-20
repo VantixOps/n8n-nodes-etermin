@@ -7,6 +7,14 @@ on:
         description: Enter PUBLISH after owner approval and acceptance
         required: true
         type: string
+      publication_mode:
+        description: Stage for personal 2FA approval, or publish with configured OIDC trust
+        required: true
+        type: choice
+        default: stage
+        options:
+          - stage
+          - publish
 permissions:
   contents: read
 concurrency:
@@ -63,8 +71,18 @@ jobs:
         with:
           name: approved-package
           path: release
-      - name: Verify transfer and publish the tarball
+      - name: Verify transfer
         working-directory: release
+        run: sha256sum --check SHA256SUMS
+      - name: Stage for personal approval
+        if: inputs.publication_mode == 'stage'
+        working-directory: release
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_BOOTSTRAP_TOKEN }}
         run: |
-          sha256sum --check SHA256SUMS
-          npm publish ./n8n-nodes-etermin-0.1.0.tgz --ignore-scripts --provenance --access public
+          test -n "$NODE_AUTH_TOKEN"
+          npm stage publish ./n8n-nodes-etermin-0.1.0.tgz --ignore-scripts --provenance --access public
+      - name: Publish with configured OIDC trust
+        if: inputs.publication_mode == 'publish'
+        working-directory: release
+        run: npm publish ./n8n-nodes-etermin-0.1.0.tgz --ignore-scripts --provenance --access public
