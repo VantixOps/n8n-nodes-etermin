@@ -5,4 +5,6 @@
 - Add signed read-only calendar, service and available time-slot operations.
 - Validate IDs, dates, target endpoints and response shapes.
 - Add output selection and synthetic contract/routing tests.
+- Use Node16 module resolution to support the additional non-beta CLI build check.
+- Document actual editor acceptance and remaining toolchain/live-account gaps.
 - Keep npm publication blocked pending acceptance and explicit approval.

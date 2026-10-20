@@ -63,9 +63,9 @@ This first version intentionally excludes appointment records, contact records, 
 
 ## Tests and acceptance
 
-`npm test` runs contract tests for signing, target restrictions, parameter mapping, dates, response validation, output modes, item preservation, unequal result counts across multiple inputs, and the real n8n response-routing implementation. Test transport is synthetic. A full authenticated eTermin account run, visual editor review and n8n approval remain external acceptance steps; passing local checks is not verification.
+`npm test` runs contract tests for signing, target restrictions, parameter mapping, dates, response validation, output modes, item preservation, unequal result counts across multiple inputs, and the real n8n response-routing implementation. Test transport is synthetic. The node has also been inspected in a disposable n8n 2.44.4 editor: calendars, services, time slots, output choices and masked credential fields. This used a local custom-extension loader, not a published npm installation. A full authenticated eTermin account run, standard package installation and n8n approval remain acceptance steps; passing local checks is not verification.
 
-See the parent project roadmap for dependency-audit findings and publication blockers. Development tools have a separate dependency chain from the dependency-free npm runtime package. Do not interpret an empty production-only dependency audit as approval of the build environment.
+The pinned CLI 0.54.0 is tagged beta. The same source also passes build and lint using CLI 0.53.2; modern Node16 module resolution is configured. Development dependency audit findings remain unresolved, so this package is not cleared for publication. See the parent project roadmap for dependency-audit findings and publication blockers. Development tools have a separate dependency chain from the dependency-free npm runtime package. Do not interpret an empty production-only dependency audit as approval of the build environment.
 
 ## API and attribution
 
