@@ -1,0 +1,61 @@
+{
+  "name": "n8n-nodes-etermin",
+  "version": "0.1.0",
+  "description": "Read eTermin calendars, services and available time slots in n8n",
+  "license": "MIT",
+  "homepage": "https://vantix-ops.de/",
+  "keywords": [
+    "n8n-community-node-package"
+  ],
+  "author": {
+    "name": "VantixOps",
+    "email": "kontakt@vantix-ops.de"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/VantixOps/n8n-nodes-etermin.git"
+  },
+  "scripts": {
+    "build": "n8n-node build",
+    "build:watch": "tsc --watch",
+    "dev": "n8n-node dev",
+    "lint": "n8n-node lint",
+    "lint:fix": "n8n-node lint --fix",
+    "prepublishOnly": "n8n-node prerelease",
+    "test": "npm run build && node --test tests/*.test.cjs"
+  },
+  "files": [
+    "dist/credentials/**/*",
+    "dist/nodes/**/*",
+    "examples/*.json",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "strict": true,
+    "credentials": [
+      "dist/credentials/EterminApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/Etermin/Etermin.node.js"
+    ]
+  },
+  "devDependencies": {
+    "@n8n/node-cli": "0.54.0",
+    "@types/node": "24.10.0",
+    "eslint": "9.39.4",
+    "n8n-core": "2.44.2",
+    "n8n-workflow": "2.44.1",
+    "prettier": "3.8.3",
+    "typescript": "5.9.3"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=22.16"
+  }
+}

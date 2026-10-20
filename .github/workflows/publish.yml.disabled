@@ -1,0 +1,30 @@
+# Prepared only; rename to publish.yml after explicit owner approval.
+name: Publish approved package
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: Enter PUBLISH after owner approval and acceptance
+        required: true
+        type: string
+jobs:
+  publish:
+    if: inputs.confirmation == 'PUBLISH'
+    runs-on: ubuntu-latest
+    environment: npm-release
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm test
+      - run: npm run lint
+      - name: Confirm publication is enabled in the approved source
+        run: node -e "if(require('./package.json').private) process.exit(1)"
+      - run: npm publish --provenance --access public

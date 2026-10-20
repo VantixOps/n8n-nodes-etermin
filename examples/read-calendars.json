@@ -1,0 +1,65 @@
+{
+  "name": "Read eTermin calendars",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "manual-start",
+      "name": "Start manually",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "calendar",
+        "operation": "getMany",
+        "calendarId": "",
+        "returnAll": true,
+        "output": "simplified"
+      },
+      "id": "read-calendars",
+      "name": "Read eTermin calendars",
+      "type": "n8n-nodes-etermin.etermin",
+      "typeVersion": 1,
+      "position": [
+        260,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Read eTermin calendars\nInstall the unpublished node in a disposable n8n instance. Assign your eTermin API credential to the read node, then run manually. This reads calendar metadata only. No reservation is made.",
+        "width": 580,
+        "height": 180
+      },
+      "id": "setup-note",
+      "name": "Setup",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        -220
+      ]
+    }
+  ],
+  "connections": {
+    "Start manually": {
+      "main": [
+        [
+          {
+            "node": "Read eTermin calendars",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
