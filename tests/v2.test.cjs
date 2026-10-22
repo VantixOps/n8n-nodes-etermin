@@ -558,3 +558,14 @@ test('a picker surfaces an eTermin XML error instead of an empty list', async ()
 	const ok = await methods.listSearch.searchCalendars.call(ctxOf([{ CalendarID: 7, CalendarName: 'Room' }]));
 	assert.deepEqual(ok.results, [{ name: 'Room', value: '7' }]);
 });
+
+test('the credential rejects custom booking-page scripts and passwords even on an allowed endpoint', async () => {
+	const cred = new EterminApi();
+	const keys = { apiKey: 'p', privateKey: 's' };
+	const base = { baseURL: 'https://www.etermin.net/api', url: '/service', method: 'POST' };
+	await assert.rejects(() => cred.authenticate(keys, { ...base, body: 'servicede=X&jscode=alert(1)' }), /scripts or passwords/);
+	await assert.rejects(() => cred.authenticate(keys, { ...base, url: '/contact', body: 'firstname=A&password=secret' }), /scripts or passwords/);
+	await assert.rejects(() => cred.authenticate(keys, { baseURL: base.baseURL, url: '/service', method: 'GET', qs: { jscode: 'x' } }), /scripts or passwords/);
+	const ok = await cred.authenticate(keys, { ...base, body: 'servicede=Beratung&timeslotminutes=30' });
+	assert.equal(ok.headers.publickey, 'p');
+});

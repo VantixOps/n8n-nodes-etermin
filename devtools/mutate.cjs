@@ -37,6 +37,7 @@ const MUTANTS = [
 	[TR, '.filter(({ event }) => events.includes(event))', '', 'event filter ignored'],
 	[C, "!ALLOWED[requestOptions.url].includes(method)", 'false', 'method not restricted'],
 	[C, "requestOptions.baseURL !== 'https://www.etermin.net/api'", 'false', 'base URL not restricted'],
+	[C, "names.has('jscode') || names.has('password')", 'false', 'jscode/password not blocked'],
 	[T, "toApiDateTime(value, field.label, 'UTC')", 'toApiDateTime(value, field.label, timeZone)', 'UTC fields converted to local time'],
 	[T, "changes: 0 }", "changes: 0, x: 1 }", 'empty change list shape'],
 	['dist/nodes/Etermin/v2/resources/misc.js', 'limit: false, headerToField', 'headerToField', 'change list cut by limit'],

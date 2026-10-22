@@ -12,6 +12,7 @@
 - Booking returns the numeric appointment ID (for update/delete), the external ID and the reference code; Check Availability is on by default (eTermin otherwise books the same time twice).
 - Optional account time zone in the credential; UTC times of external appointments are calculated automatically.
 - Contacts can be picked from a searchable list; Delete Many is limited to 31 days per run.
+- The credential restricts requests to the documented eTermin endpoints and methods, and additionally rejects custom booking-page scripts (`jscode`) and passwords, which the node never sends.
 - Node version 1 is unchanged; existing workflows keep working.
 
 ## 0.1.1

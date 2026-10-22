@@ -35,6 +35,20 @@ export class EterminApi implements ICredentialType {
 			!ALLOWED[requestOptions.url].includes(method)) {
 			throw new Error('This credential only supports the documented eTermin API endpoints');
 		}
+		// Defence in depth: the node never sends these, and they are the only ones that could run code or set a
+		// login secret on the eTermin account. Reject them even if a request is crafted outside the node.
+		const names = new Set<string>();
+		if (requestOptions.qs && typeof requestOptions.qs === 'object') {
+			for (const k of Object.keys(requestOptions.qs as object)) names.add(k.toLowerCase());
+		}
+		if (typeof requestOptions.body === 'string') {
+			for (const k of new URLSearchParams(requestOptions.body).keys()) names.add(k.toLowerCase());
+		} else if (requestOptions.body && typeof requestOptions.body === 'object') {
+			for (const k of Object.keys(requestOptions.body as object)) names.add(k.toLowerCase());
+		}
+		if (names.has('jscode') || names.has('password')) {
+			throw new Error('This credential does not allow custom booking-page scripts or passwords in eTermin requests');
+		}
 		const salt = randomBytes(16).toString('hex');
 		return {
 			...requestOptions,
