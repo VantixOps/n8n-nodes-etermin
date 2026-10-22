@@ -569,3 +569,19 @@ test('the credential rejects custom booking-page scripts and passwords even on a
 	const ok = await cred.authenticate(keys, { ...base, body: 'servicede=Beratung&timeslotminutes=30' });
 	assert.equal(ok.headers.publickey, 'p');
 });
+
+test('the credential refuses request shapes the node never builds', async () => {
+	const cred = new EterminApi();
+	const keys = { apiKey: 'p', privateKey: 's' };
+	const base = { baseURL: 'https://www.etermin.net/api', url: '/service', method: 'POST' };
+	await assert.rejects(() => cred.authenticate(keys, { ...base, body: Buffer.from('jscode=x') }), /requests built by the node/);
+	await assert.rejects(() => cred.authenticate(keys, { ...base, body: new URLSearchParams('jscode=x') }), /requests built by the node/);
+	await assert.rejects(() => cred.authenticate(keys, { ...base, form: { jscode: 'x' } }), /requests built by the node/);
+	await assert.rejects(() => cred.authenticate(keys, { ...base, formData: { password: 'x' } }), /requests built by the node/);
+	await assert.rejects(() => cred.authenticate(keys, { baseURL: base.baseURL, url: '/calendar', method: 'GET', qs: new URLSearchParams('x=1') }), /requests built by the node/);
+	// a plain-object body with a forbidden key is still caught by the parameter check
+	await assert.rejects(() => cred.authenticate(keys, { ...base, body: { servicede: 'X', jscode: 'y' } }), /scripts or passwords/);
+	// the shapes the node really uses pass
+	assert.equal((await cred.authenticate(keys, { ...base, body: 'servicede=Beratung' })).headers.publickey, 'p');
+	assert.equal((await cred.authenticate(keys, { baseURL: base.baseURL, url: '/calendar', method: 'GET', qs: { calendarid: '1' } })).headers.publickey, 'p');
+});

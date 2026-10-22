@@ -35,16 +35,27 @@ export class EterminApi implements ICredentialType {
 			!ALLOWED[requestOptions.url].includes(method)) {
 			throw new Error('This credential only supports the documented eTermin API endpoints');
 		}
-		// Defence in depth: the node never sends these, and they are the only ones that could run code or set a
+		// Fail closed on the request shape: the node only ever sends a urlencoded string body or a `qs` object.
+		// Anything else (Buffer, FormData, stream, JSON body, or the form/formData/uri options) is refused, so the
+		// parameter check below cannot be bypassed with a body it would not parse.
+		const ro = requestOptions as unknown as Record<string, unknown>;
+		const isPlainObject = (v: unknown): v is Record<string, unknown> =>
+			typeof v === 'object' && v !== null && Object.getPrototypeOf(v) === Object.prototype;
+		if (ro.form !== undefined || ro.formData !== undefined || ro.uri !== undefined ||
+			(requestOptions.qs !== undefined && !isPlainObject(requestOptions.qs)) ||
+			(requestOptions.body !== undefined && typeof requestOptions.body !== 'string' && !isPlainObject(requestOptions.body))) {
+			throw new Error('This credential only accepts the eTermin requests built by the node');
+		}
+		// Defence in depth: the node never sends these, and they are the only parameters that could run code or set a
 		// login secret on the eTermin account. Reject them even if a request is crafted outside the node.
 		const names = new Set<string>();
-		if (requestOptions.qs && typeof requestOptions.qs === 'object') {
-			for (const k of Object.keys(requestOptions.qs as object)) names.add(k.toLowerCase());
+		if (isPlainObject(requestOptions.qs)) {
+			for (const k of Object.keys(requestOptions.qs)) names.add(k.trim().toLowerCase());
 		}
 		if (typeof requestOptions.body === 'string') {
-			for (const k of new URLSearchParams(requestOptions.body).keys()) names.add(k.toLowerCase());
-		} else if (requestOptions.body && typeof requestOptions.body === 'object') {
-			for (const k of Object.keys(requestOptions.body as object)) names.add(k.toLowerCase());
+			for (const k of new URLSearchParams(requestOptions.body).keys()) names.add(k.trim().toLowerCase());
+		} else if (isPlainObject(requestOptions.body)) {
+			for (const k of Object.keys(requestOptions.body)) names.add(k.trim().toLowerCase());
 		}
 		if (names.has('jscode') || names.has('password')) {
 			throw new Error('This credential does not allow custom booking-page scripts or passwords in eTermin requests');
