@@ -32,7 +32,7 @@
     },
     {
       "parameters": {
-        "content": "## Read eTermin calendars\nInstall the unpublished node in a disposable n8n instance. Assign your eTermin API credential to the read node, then run manually. This reads calendar metadata only. No reservation is made.",
+        "content": "## Read eTermin calendars\nInstall n8n-nodes-etermin from Settings > Community Nodes. Assign your eTermin API credential to the read node, then run manually. This only reads calendar data; nothing in your eTermin account is changed.",
         "width": 580,
         "height": 180
       },

@@ -8,12 +8,12 @@
   "resources": {
     "credentialDocumentation": [
       {
-        "url": "https://www.etermin.net/online-terminplaner-api"
+        "url": "https://github.com/VantixOps/n8n-nodes-etermin#credentials"
       }
     ],
     "primaryDocumentation": [
       {
-        "url": "https://www.etermin.net/online-terminplaner-api"
+        "url": "https://github.com/VantixOps/n8n-nodes-etermin#readme"
       }
     ]
   }

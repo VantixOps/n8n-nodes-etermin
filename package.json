@@ -1,11 +1,18 @@
 {
   "name": "n8n-nodes-etermin",
-  "version": "0.1.0",
-  "description": "Read eTermin calendars, services and available time slots in n8n",
+  "version": "0.2.0",
+  "description": "Book, change and cancel eTermin appointments, manage contacts, calendars and services, and trigger workflows on new bookings in n8n",
   "license": "MIT",
-  "homepage": "https://vantix-ops.de/",
+  "homepage": "https://github.com/VantixOps/n8n-nodes-etermin#readme",
   "keywords": [
-    "n8n-community-node-package"
+    "n8n-community-node-package",
+    "n8n",
+    "etermin",
+    "appointment",
+    "scheduling",
+    "booking",
+    "availability",
+    "time-slots"
   ],
   "author": {
     "name": "VantixOps",
@@ -14,6 +21,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/VantixOps/n8n-nodes-etermin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/VantixOps/n8n-nodes-etermin/issues"
   },
   "scripts": {
     "build": "n8n-node build",
@@ -30,8 +40,7 @@
     "examples/*.json",
     "README.md",
     "LICENSE",
-    "CHANGELOG.md",
-    "DEVELOPMENT_SECURITY.md"
+    "CHANGELOG.md"
   ],
   "n8n": {
     "n8nNodesApiVersion": 1,
@@ -40,7 +49,8 @@
       "dist/credentials/EterminApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/Etermin/Etermin.node.js"
+      "dist/nodes/Etermin/Etermin.node.js",
+      "dist/nodes/EterminTrigger/EterminTrigger.node.js"
     ]
   },
   "devDependencies": {

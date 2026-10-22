@@ -25,7 +25,7 @@ test('auth rejects missing credentials, non-service targets and path escapes', a
   for (const creds of [{}, {apiKey:'x'}, {privateKey:'x'}, {...fakeCredentials,apiKey:'x\r\ninjected: true'}]) {
     await assert.rejects(() => api.authenticate(creds, req()));
   }
-  for (const url of ['https://example.com/api/calendar', '//example.com/calendar', '/contact', '/calendar/../contact']) {
+  for (const url of ['https://example.com/api/calendar', '//example.com/calendar', '/admin', '/calendar/../contact', '/contact?x=1', '/Contact']) {
     await assert.rejects(() => api.authenticate(fakeCredentials, {...req(),url}));
   }
   await assert.rejects(() => api.authenticate(fakeCredentials, {...req(),baseURL:'http://www.etermin.net/api'}));
@@ -82,8 +82,10 @@ test('response validates shape, simplifies values, preserves links, and supports
 });
 
 test('credentials are hidden and package has no runtime dependencies', () => {
-  assert.equal(api.properties.length,2);
-  for (const p of api.properties) { assert.equal(p.typeOptions.password,true);assert.equal(p.required,true); }
+  // both keys are secret and required; the optional account time zone (added in 0.2.0) is not a secret
+  assert.deepEqual(api.properties.map((p) => p.name), ['apiKey', 'privateKey', 'timeZone']);
+  for (const p of api.properties.slice(0, 2)) { assert.equal(p.typeOptions.password,true);assert.equal(p.required,true); }
+  assert.equal(api.properties[2].required, undefined);
   const pkg=require('../package.json');
   assert.equal(Object.keys(pkg.dependencies||{}).length,0);
   assert.equal(pkg.license,'MIT');assert.equal(pkg.private,false);

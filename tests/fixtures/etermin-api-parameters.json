@@ -1,0 +1,1135 @@
+{
+ "operations": {
+  "DELETE /anchortime": {
+   "optional": [],
+   "required": [
+    "id"
+   ]
+  },
+  "DELETE /anchortimedate": {
+   "optional": [],
+   "required": [
+    "id"
+   ]
+  },
+  "DELETE /appointment": {
+   "optional": [
+    "appid",
+    "end",
+    "id",
+    "msgtype",
+    "sendemail",
+    "start",
+    "sync"
+   ],
+   "required": []
+  },
+  "DELETE /appointmentsync": {
+   "optional": [
+    "appointmentid",
+    "end",
+    "start"
+   ],
+   "required": []
+  },
+  "DELETE /calendar": {
+   "optional": [],
+   "required": [
+    "id"
+   ]
+  },
+  "DELETE /calendarreturntime": {
+   "optional": [],
+   "required": [
+    "id"
+   ]
+  },
+  "DELETE /calendarservice": {
+   "optional": [],
+   "required": [
+    "id"
+   ]
+  },
+  "DELETE /calendarsnonworkingtimes": {
+   "optional": [],
+   "required": [
+    "id"
+   ]
+  },
+  "DELETE /contact": {
+   "optional": [
+    "cid",
+    "email",
+    "id"
+   ],
+   "required": []
+  },
+  "DELETE /service": {
+   "optional": [],
+   "required": [
+    "id"
+   ]
+  },
+  "DELETE /servicegroup": {
+   "optional": [],
+   "required": [
+    "servicegroupid"
+   ]
+  },
+  "DELETE /usermapping": {
+   "optional": [],
+   "required": [
+    "id"
+   ]
+  },
+  "DELETE /voucher": {
+   "optional": [
+    "id"
+   ],
+   "required": []
+  },
+  "DELETE /workingtimes": {
+   "optional": [
+    "id"
+   ],
+   "required": [
+    "calendarid"
+   ]
+  },
+  "DELETE /workingtimesdate": {
+   "optional": [
+    "calendarid",
+    "id"
+   ],
+   "required": []
+  },
+  "GET /anchortime": {
+   "optional": [
+    "calendarid"
+   ],
+   "required": []
+  },
+  "GET /anchortimedate": {
+   "optional": [
+    "calendarid"
+   ],
+   "required": []
+  },
+  "GET /appointment": {
+   "optional": [
+    "appid",
+    "bycreationdate",
+    "calendarid",
+    "cid",
+    "email",
+    "end",
+    "id",
+    "limited",
+    "manualconfirmed",
+    "noholidays",
+    "noholidays2",
+    "pbl",
+    "start",
+    "wl"
+   ],
+   "required": []
+  },
+  "GET /appointmentdeleted": {
+   "optional": [
+    "end",
+    "id",
+    "start"
+   ],
+   "required": []
+  },
+  "GET /appointmentsync": {
+   "optional": [],
+   "required": [
+    "synctoken"
+   ]
+  },
+  "GET /bookingpagelogs": {
+   "optional": [
+    "summaryonly"
+   ],
+   "required": [
+    "datefrom"
+   ]
+  },
+  "GET /calendar": {
+   "optional": [
+    "calendarid"
+   ],
+   "required": []
+  },
+  "GET /calendarreturntime": {
+   "optional": [],
+   "required": [
+    "calendarid"
+   ]
+  },
+  "GET /calendarservice": {
+   "optional": [
+    "calendarid"
+   ],
+   "required": []
+  },
+  "GET /calendarsnonworkingtimes": {
+   "optional": [],
+   "required": [
+    "calendarid"
+   ]
+  },
+  "GET /contact": {
+   "optional": [
+    "cid",
+    "creationdate",
+    "creationdateall",
+    "email",
+    "id"
+   ],
+   "required": []
+  },
+  "GET /contactfrequency": {
+   "optional": [],
+   "required": [
+    "cid"
+   ]
+  },
+  "GET /contactservice": {
+   "optional": [],
+   "required": [
+    "cid"
+   ]
+  },
+  "GET /messagelogs": {
+   "optional": [
+    "appid",
+    "id",
+    "smsonly"
+   ],
+   "required": []
+  },
+  "GET /rating": {
+   "optional": [],
+   "required": []
+  },
+  "GET /service": {
+   "optional": [
+    "ServiceGroupID",
+    "addimage",
+    "id",
+    "languageid"
+   ],
+   "required": []
+  },
+  "GET /servicecalendar": {
+   "optional": [],
+   "required": [
+    "serviceid"
+   ]
+  },
+  "GET /servicegroup": {
+   "optional": [
+    "languageid",
+    "servicegroupid"
+   ],
+   "required": []
+  },
+  "GET /surveyresults": {
+   "optional": [
+    "appid",
+    "date"
+   ],
+   "required": []
+  },
+  "GET /timeslots": {
+   "optional": [
+    "calendarid",
+    "capacity",
+    "cluster",
+    "duration",
+    "end",
+    "rangesearch",
+    "serviceid"
+   ],
+   "required": [
+    "date"
+   ]
+  },
+  "GET /usermapping": {
+   "optional": [
+    "searchvalue"
+   ],
+   "required": []
+  },
+  "GET /voucher": {
+   "optional": [],
+   "required": []
+  },
+  "GET /workingtimes": {
+   "optional": [
+    "all",
+    "join"
+   ],
+   "required": [
+    "calendarid"
+   ]
+  },
+  "GET /workingtimesdate": {
+   "optional": [
+    "end",
+    "join",
+    "start"
+   ],
+   "required": [
+    "calendarid"
+   ]
+  },
+  "POST /anchortime": {
+   "optional": [],
+   "required": [
+    "calendarid",
+    "ignoreonceappbooked",
+    "starttime",
+    "weekday"
+   ]
+  },
+  "POST /anchortimedate": {
+   "optional": [
+    "reason"
+   ],
+   "required": [
+    "calendarid",
+    "ignoreonceappbooked",
+    "startdate"
+   ]
+  },
+  "POST /appointment": {
+   "optional": [
+    "additional1",
+    "additional10",
+    "additional11",
+    "additional12",
+    "additional13",
+    "additional14",
+    "additional15",
+    "additional16",
+    "additional17",
+    "additional18",
+    "additional19",
+    "additional2",
+    "additional20",
+    "additional3",
+    "additional4",
+    "additional5",
+    "additional6",
+    "additional7",
+    "additional8",
+    "additional9",
+    "agbaccepted",
+    "appointmentreminderhours",
+    "appointmentreminderhours2",
+    "birthday",
+    "blacklist",
+    "bookerinfo",
+    "bookingtype",
+    "bookingurl",
+    "calendarname",
+    "calselid",
+    "canceldeadline",
+    "capacity",
+    "capmaxused",
+    "capused",
+    "checkexist",
+    "city",
+    "company",
+    "confirmappointment",
+    "confirmtime",
+    "customernumber",
+    "dataprivacyaccepted",
+    "email",
+    "emailm",
+    "feedbackpermissionaccepted",
+    "firstname",
+    "language",
+    "lastname",
+    "lnm",
+    "location",
+    "manualconfirmed",
+    "newsletter",
+    "notes",
+    "notificationmsg",
+    "phone",
+    "pricegross",
+    "pricenet",
+    "recurrenceparentid",
+    "recurrencerule",
+    "salutation",
+    "sendemail",
+    "services",
+    "servicesabb",
+    "servicesinclsgtext",
+    "servicestext",
+    "sms",
+    "street",
+    "sync",
+    "title",
+    "vat",
+    "zip"
+   ],
+   "required": [
+    "calendarid",
+    "end",
+    "start"
+   ]
+  },
+  "POST /appointmentsync": {
+   "optional": [
+    "email",
+    "location",
+    "recurrenceparentid",
+    "recurrencerule",
+    "sendemail",
+    "sequence"
+   ],
+   "required": [
+    "appointmentid",
+    "calendarid",
+    "description",
+    "end",
+    "endutc",
+    "start",
+    "startutc",
+    "summary"
+   ]
+  },
+  "POST /calendar": {
+   "optional": [],
+   "required": []
+  },
+  "POST /calendarreturntime": {
+   "optional": [],
+   "required": [
+    "calendarid",
+    "endtime",
+    "newday",
+    "starttime",
+    "weekdayidx"
+   ]
+  },
+  "POST /calendarservice": {
+   "optional": [],
+   "required": [
+    "calendarid",
+    "serviceid"
+   ]
+  },
+  "POST /calendarsnonworkingtimes": {
+   "optional": [
+    "dynamicdays",
+    "dynamicdaysduration",
+    "nwtype",
+    "reason"
+   ],
+   "required": [
+    "appcalendarid",
+    "enddate",
+    "startdate"
+   ]
+  },
+  "POST /contact": {
+   "optional": [
+    "additional1",
+    "additional10",
+    "additional11",
+    "additional12",
+    "additional13",
+    "additional14",
+    "additional15",
+    "additional16",
+    "additional17",
+    "additional18",
+    "additional19",
+    "additional2",
+    "additional20",
+    "additional3",
+    "additional4",
+    "additional5",
+    "additional6",
+    "additional7",
+    "additional8",
+    "additional9",
+    "birthday",
+    "city",
+    "company",
+    "country",
+    "customernumber",
+    "email",
+    "firstname",
+    "lastname",
+    "loginid",
+    "newsletter",
+    "password",
+    "phone",
+    "salutation",
+    "state",
+    "street",
+    "title",
+    "updatewhenexistsgdt",
+    "zip"
+   ],
+   "required": []
+  },
+  "POST /contactfrequency": {
+   "optional": [],
+   "required": [
+    "cid",
+    "frequency",
+    "frequencytype",
+    "limited"
+   ]
+  },
+  "POST /contactservice": {
+   "optional": [],
+   "required": [
+    "cid",
+    "sgid"
+   ]
+  },
+  "POST /service": {
+   "optional": [
+    "PM0",
+    "PM1",
+    "PM2",
+    "abbreviation",
+    "addapphours",
+    "allowonlythisservice",
+    "appattrib",
+    "appdeadline",
+    "appfuture",
+    "appointmentlocation",
+    "appointmentlocationtext",
+    "bookingminute",
+    "bookingtype",
+    "calcdrivingtime",
+    "calendarselection",
+    "canceldeadline",
+    "capacitynonsel",
+    "capseltextde",
+    "cluster",
+    "currency",
+    "customerconfirm",
+    "customerconfirmtime",
+    "dayselectiontype",
+    "differenttimecombined",
+    "differenttimeresource",
+    "emailsender",
+    "emailtxtde",
+    "enablecapacity",
+    "enabled",
+    "externalreference",
+    "externalreferencecalname",
+    "externalreferencecancel",
+    "externalreferencechange",
+    "externalreferencedate",
+    "externalreferencedelete",
+    "externalreferencelocation",
+    "extramin",
+    "extramintype",
+    "feedback",
+    "fillcalendarstrategy",
+    "hideserviceids",
+    "image",
+    "infode",
+    "infodisplay",
+    "infotextinslots",
+    "infotxtp2",
+    "issubscription",
+    "jscode",
+    "limitappointments",
+    "limitappointmentstype",
+    "limitbooking",
+    "limitservice",
+    "maxappsel",
+    "maxcapacity",
+    "maxcapacityusersel",
+    "maxminslots",
+    "mpbs",
+    "mstextpos",
+    "multiappointment",
+    "multiplypricewithcap",
+    "multiservicedurationcalcmethod",
+    "multiservicemax",
+    "multiservicemin",
+    "multiservicesel",
+    "notearlyapp",
+    "nrappsel",
+    "nrappseladjacent",
+    "nrappseladjacenttype",
+    "nrtimeslotentries",
+    "paymentamountisabsolute",
+    "paymentamountpercentage",
+    "paymentduration",
+    "price",
+    "pricediffperday",
+    "priceinfopos",
+    "priceispercentage",
+    "pricesuffixde",
+    "rangeend",
+    "rangestart",
+    "reminderhours",
+    "reminderhours2",
+    "rrule",
+    "severalcalendarsused",
+    "showavcap",
+    "showcalname",
+    "showcalpic",
+    "showcapselectionbox",
+    "showindb",
+    "showinternal",
+    "showserviceids",
+    "smsconfirmation",
+    "sortorder",
+    "specificrangenextslot",
+    "ssca",
+    "startedapp",
+    "tags",
+    "tagscancel",
+    "timeslotcombined",
+    "timeslotformat",
+    "timeslotminutesresend",
+    "timeslotminutesresstart",
+    "uselogo",
+    "vat",
+    "vendorconfirmation",
+    "voucherfield",
+    "waitinglist",
+    "workloadperc",
+    "wowing",
+    "wowingautomationid"
+   ],
+   "required": [
+    "servicede",
+    "servicegroupid",
+    "timeslotminutes"
+   ]
+  },
+  "POST /servicegroup": {
+   "optional": [
+    "additionaltextde",
+    "addtextdisplaymode",
+    "answerselection",
+    "collapse",
+    "enabled",
+    "isoptional",
+    "nrservicecolumns",
+    "servicegroupde",
+    "servicegrouptype",
+    "showduration",
+    "showinsummary",
+    "showprice",
+    "showtoggle",
+    "showwhencertainanswerselected"
+   ],
+   "required": []
+  },
+  "POST /usermapping": {
+   "optional": [
+    "calendarid",
+    "servicegroupid",
+    "value",
+    "valuefrom",
+    "valueto",
+    "valuetype"
+   ],
+   "required": []
+  },
+  "POST /voucher": {
+   "optional": [
+    "calendarsassigned",
+    "contingentcounter",
+    "contingentmax",
+    "customeremail",
+    "description",
+    "ispercentage",
+    "onetimevalidperemail",
+    "priceinclvat",
+    "priceoriginal",
+    "sendreminder",
+    "servicesassigned",
+    "validfrom",
+    "validuntil",
+    "validxtimes"
+   ],
+   "required": [
+    "id"
+   ]
+  },
+  "POST /workingtimes": {
+   "optional": [
+    "allserviceidsrequired",
+    "calendarintervalid",
+    "enable",
+    "locationid",
+    "nrapps",
+    "slottype",
+    "validwithserviceid",
+    "weektype"
+   ],
+   "required": [
+    "calendarid",
+    "end",
+    "start",
+    "weekday"
+   ]
+  },
+  "POST /workingtimesdate": {
+   "optional": [
+    "allserviceidsrequired",
+    "locationid",
+    "nrapps",
+    "oneoff",
+    "oneoffcode",
+    "overwriteday",
+    "reason",
+    "serviceids",
+    "slottype",
+    "waitinglist"
+   ],
+   "required": [
+    "calendarid",
+    "end",
+    "start"
+   ]
+  },
+  "PUT /anchortime": {
+   "optional": [
+    "calendarid",
+    "ignoreonceappbooked",
+    "starttime",
+    "weekday"
+   ],
+   "required": [
+    "id"
+   ]
+  },
+  "PUT /anchortimedate": {
+   "optional": [
+    "reason"
+   ],
+   "required": [
+    "calendarid",
+    "id",
+    "ignoreonceappbooked",
+    "startdate"
+   ]
+  },
+  "PUT /appointment": {
+   "optional": [
+    "additional1",
+    "additional10",
+    "additional11",
+    "additional12",
+    "additional13",
+    "additional14",
+    "additional15",
+    "additional16",
+    "additional17",
+    "additional18",
+    "additional19",
+    "additional2",
+    "additional20",
+    "additional3",
+    "additional4",
+    "additional5",
+    "additional6",
+    "additional7",
+    "additional8",
+    "additional9",
+    "appointmentreminderhours",
+    "appointmentreminderhours2",
+    "calendarid",
+    "calendarname",
+    "canceldeadline",
+    "capacity",
+    "city",
+    "company",
+    "customernumber",
+    "email",
+    "end",
+    "firstname",
+    "lastname",
+    "linkedappidmanual",
+    "location",
+    "manualconfirmed",
+    "msgtype",
+    "msgtypesms",
+    "notes",
+    "notificationmsg",
+    "phone",
+    "pricegross",
+    "pricenet",
+    "recurrencerule",
+    "salutation",
+    "sendemail",
+    "sendsms",
+    "services",
+    "servicesabb",
+    "servicesinclsgtext",
+    "servicestext",
+    "start",
+    "street",
+    "sync",
+    "title",
+    "vat",
+    "zip"
+   ],
+   "required": [
+    "id"
+   ]
+  },
+  "PUT /appointmentsync": {
+   "optional": [
+    "email",
+    "location",
+    "recurrenceparentid",
+    "recurrencerule",
+    "sequence"
+   ],
+   "required": [
+    "appointmentid",
+    "calendarid",
+    "description",
+    "end",
+    "endutc",
+    "start",
+    "startutc",
+    "summary"
+   ]
+  },
+  "PUT /calendar": {
+   "optional": [
+    "calendarname",
+    "calendartype",
+    "city",
+    "completeappointmentwithinopeninghours",
+    "country",
+    "descriptiondisplaytype",
+    "descriptionlanguagecode",
+    "differentlocation",
+    "emaillocation",
+    "enablecapacity",
+    "limittoduration",
+    "maxcapacity",
+    "maxduration",
+    "mobilephone",
+    "name",
+    "smsnotification",
+    "smsphonenumber",
+    "smstimespanhours",
+    "street",
+    "telephone",
+    "waitingnr",
+    "web",
+    "wnprefix",
+    "wnstartnr",
+    "zip"
+   ],
+   "required": [
+    "id"
+   ]
+  },
+  "PUT /calendarreturntime": {
+   "optional": [
+    "calendarid",
+    "endtime",
+    "newday",
+    "starttime",
+    "weekdayidx"
+   ],
+   "required": [
+    "id"
+   ]
+  },
+  "PUT /calendarsnonworkingtimes": {
+   "optional": [
+    "appcalendarid",
+    "dynamicdays",
+    "enddate",
+    "nwtype",
+    "reason",
+    "startdate"
+   ],
+   "required": [
+    "id"
+   ]
+  },
+  "PUT /contact": {
+   "optional": [
+    "additional1",
+    "additional10",
+    "additional11",
+    "additional12",
+    "additional13",
+    "additional14",
+    "additional15",
+    "additional16",
+    "additional17",
+    "additional18",
+    "additional19",
+    "additional2",
+    "additional20",
+    "additional3",
+    "additional4",
+    "additional5",
+    "additional6",
+    "additional7",
+    "additional8",
+    "additional9",
+    "birthday",
+    "city",
+    "company",
+    "country",
+    "customernumber",
+    "email",
+    "lastname",
+    "limitedservices",
+    "loginid",
+    "newsletter",
+    "password",
+    "phone",
+    "salutation",
+    "state",
+    "street",
+    "tags",
+    "title",
+    "zip"
+   ],
+   "required": []
+  },
+  "PUT /service": {
+   "optional": [
+    "PM0",
+    "PM1",
+    "PM2",
+    "abbreviation",
+    "addapphours",
+    "allowonlythisservice",
+    "appattrib",
+    "appdeadline",
+    "appfuture",
+    "appointmentlocation",
+    "appointmentlocationtext",
+    "bookingminute",
+    "bookingtype",
+    "calcdrivingtime",
+    "calendarselection",
+    "canceldeadline",
+    "capacitynonsel",
+    "capseltextde",
+    "cluster",
+    "currency",
+    "customerconfirm",
+    "customerconfirmtime",
+    "dayselectiontype",
+    "differenttimecombined",
+    "differenttimeresource",
+    "emailsender",
+    "emailtxtde",
+    "enablecapacity",
+    "enabled",
+    "externalreference",
+    "externalreferencecalname",
+    "externalreferencecancel",
+    "externalreferencechange",
+    "externalreferencedate",
+    "externalreferencedelete",
+    "externalreferencelocation",
+    "extramin",
+    "extramintype",
+    "feedback",
+    "fillcalendarstrategy",
+    "hideserviceids",
+    "image",
+    "infode",
+    "infodisplay",
+    "infotextinslots",
+    "infotxtp2",
+    "issubscription",
+    "jscode",
+    "limitappointments",
+    "limitappointmentstype",
+    "limitbooking",
+    "limitservice",
+    "maxappsel",
+    "maxcapacity",
+    "maxcapacityusersel",
+    "maxminslots",
+    "mpbs",
+    "mstextpos",
+    "multiappointment",
+    "multiplypricewithcap",
+    "multiservicedurationcalcmethod",
+    "multiservicemax",
+    "multiservicemin",
+    "multiservicesel",
+    "notearlyapp",
+    "nrappsel",
+    "nrappseladjacent",
+    "nrappseladjacenttype",
+    "nrtimeslotentries",
+    "paymentamountisabsolute",
+    "paymentamountpercentage",
+    "paymentduration",
+    "price",
+    "pricediffperday",
+    "priceinfopos",
+    "priceispercentage",
+    "pricesuffixde",
+    "rangeend",
+    "rangestart",
+    "reminderhours",
+    "reminderhours2",
+    "rrule",
+    "servicede",
+    "servicegroupid",
+    "severalcalendarsused",
+    "showavcap",
+    "showcalname",
+    "showcalpic",
+    "showcapselectionbox",
+    "showindb",
+    "showinternal",
+    "showserviceids",
+    "smsconfirmation",
+    "sortorder",
+    "specificrangenextslot",
+    "ssca",
+    "startedapp",
+    "tags",
+    "tagscancel",
+    "timeslotcombined",
+    "timeslotformat",
+    "timeslotminutes",
+    "timeslotminutesresend",
+    "timeslotminutesresstart",
+    "uselogo",
+    "vat",
+    "vendorconfirmation",
+    "voucherfield",
+    "waitinglist",
+    "workloadperc",
+    "wowing",
+    "wowingautomationid"
+   ],
+   "required": [
+    "id"
+   ]
+  },
+  "PUT /servicegroup": {
+   "optional": [
+    "additionaltextde",
+    "addtextdisplaymode",
+    "answerselection",
+    "answersortorder",
+    "collapse",
+    "countrylimitation",
+    "enabled",
+    "errormsgde",
+    "isoptional",
+    "nrservicecolumns",
+    "pageidx",
+    "regex",
+    "selminduration",
+    "selminprice",
+    "servicegroupde",
+    "servicegrouptype",
+    "showduration",
+    "showimgfull",
+    "showinemailsummary",
+    "showinsummary",
+    "showprice",
+    "showtoggle",
+    "showwhencertainanswerselected"
+   ],
+   "required": [
+    "displayindex",
+    "servicegroupid"
+   ]
+  },
+  "PUT /usermapping": {
+   "optional": [
+    "calendarid",
+    "id",
+    "servicegroupid",
+    "value",
+    "valuefrom",
+    "valueto",
+    "valuetype"
+   ],
+   "required": []
+  },
+  "PUT /voucher": {
+   "optional": [
+    "calendarsassigned",
+    "contingentcounter",
+    "contingentmax",
+    "customeremail",
+    "description",
+    "ispercentage",
+    "onetimevalidperemail",
+    "priceinclvat",
+    "priceoriginal",
+    "sendreminder",
+    "servicesassigned",
+    "validfrom",
+    "validuntil",
+    "validxtimes"
+   ],
+   "required": [
+    "id"
+   ]
+  },
+  "PUT /workingtimes": {
+   "optional": [
+    "allserviceidsrequired",
+    "calendarid",
+    "calendarintervalid",
+    "enable",
+    "end",
+    "locationid",
+    "nrapps",
+    "slottype",
+    "start",
+    "validwithserviceid",
+    "weekday",
+    "weektype"
+   ],
+   "required": [
+    "id"
+   ]
+  },
+  "PUT /workingtimesdate": {
+   "optional": [
+    "allserviceidsrequired",
+    "locationid",
+    "nrapps",
+    "oneoff",
+    "oneoffcode",
+    "overwriteday",
+    "reason",
+    "serviceids",
+    "slottype",
+    "waitinglist"
+   ],
+   "required": [
+    "calendarid",
+    "end",
+    "id",
+    "start"
+   ]
+  }
+ },
+ "source": "eTermin API 1.0.0 (SwaggerHub etermin.net/eTermin-API/1.0.0), names only, extracted 2026-10-22"
+}

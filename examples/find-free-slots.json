@@ -1,0 +1,67 @@
+{
+  "name": "Find free eTermin slots for tomorrow",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "manual-start",
+      "name": "Start manually",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "timeSlot",
+        "operation": "getMany",
+        "date": "={{ $today.plus({ days: 1 }).toFormat('yyyy-MM-dd') }}",
+        "calendarId": "",
+        "serviceId": "",
+        "returnAll": true,
+        "output": "simplified"
+      },
+      "id": "read-slots",
+      "name": "Free slots tomorrow",
+      "type": "n8n-nodes-etermin.etermin",
+      "typeVersion": 1,
+      "position": [
+        260,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Free eTermin slots for tomorrow\nInstall n8n-nodes-etermin from Settings > Community Nodes and assign your eTermin API credential. Optionally set a Calendar ID and Service ID (needed if your account limits slots per service). Each free slot becomes one item, ready for a chat message, an email or an AI Agent. Only reads data; nothing in your eTermin account is changed.",
+        "width": 620,
+        "height": 200
+      },
+      "id": "setup-note",
+      "name": "Setup",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        -240
+      ]
+    }
+  ],
+  "connections": {
+    "Start manually": {
+      "main": [
+        [
+          {
+            "node": "Free slots tomorrow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

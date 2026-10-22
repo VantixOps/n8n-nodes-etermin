@@ -42,7 +42,7 @@ jobs:
           mkdir release
           npm pack --ignore-scripts --pack-destination release
           cd release
-          sha256sum n8n-nodes-etermin-0.1.0.tgz > SHA256SUMS
+          sha256sum "n8n-nodes-etermin-$(node -p "require('../package.json').version").tgz" > SHA256SUMS
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: approved-package
@@ -82,7 +82,7 @@ jobs:
             npmrc="$(mktemp)"
             trap 'rm -f "$npmrc"' EXIT
             printf '//registry.npmjs.org/:_authToken=%s\n' "$BOOTSTRAP_NPM_TOKEN" > "$npmrc"
-            npm stage publish ./n8n-nodes-etermin-0.1.0.tgz --userconfig "$npmrc" --ignore-scripts --provenance --access public
+            npm stage publish "./$(cut -d' ' -f3 SHA256SUMS)" --userconfig "$npmrc" --ignore-scripts --provenance --access public
           else
-            npm stage publish ./n8n-nodes-etermin-0.1.0.tgz --ignore-scripts --provenance --access public
+            npm stage publish "./$(cut -d' ' -f3 SHA256SUMS)" --ignore-scripts --provenance --access public
           fi
